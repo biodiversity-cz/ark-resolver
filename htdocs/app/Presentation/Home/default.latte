@@ -1,0 +1,14 @@
+{block content}
+<h1 n:block=title xmlns:n="http://www.w3.org/1999/xhtml">ARK resolver of NAAN {$naan} </h1>
+<p><a href="https://arks.org/">ARK</a> resolver of the <a href="https://eosc.cz">EOSC CZ</a> NRP <a href="https://biodiversity.cz">biodiversity repositories</a>.</p>
+
+<h3>Endpoints available:</h3>
+<ul>
+    <li><code>{$basePath}/resolve/&#36;&#123;value&#125;</code> - resolves the ARK value part (without scheme and prefix=NAAN)</li>
+    <li><code>{$basePath}/resolve?ark=&#36;&#123;pid&#125;</code> - resolves the whole ARK PID</li>
+    both with relevant health checks:
+    <li><a n:href=":resolve App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, App\Presentation\Home\HomePresenter::HealthCheck}</a></li>
+    <li><a n:href=":resolve null, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, null, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck}</a></li>
+</ul>
+
+

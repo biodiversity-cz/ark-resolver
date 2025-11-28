@@ -1,0 +1,39 @@
+{
+	"name": "biodiversitycz/ark",
+	"description": "ARK resolver biodiversity.cz",
+	"keywords": ["nette"],
+	"type": "project",
+	"license": ["MIT"],
+	"require": {
+		"php": ">= 8.5",
+		"nette/application": "^3",
+		"nette/bootstrap": "^3",
+		"nette/caching": "^3",
+		"nette/di": "^3",
+		"nette/http": "^3",
+		"nette/robot-loader": "^4",
+		"nette/security": "^3",
+		"nette/utils": "^4",
+		"latte/latte": "^3",
+		"tracy/tracy": "^2"
+	},
+	"require-dev": {
+		"nette/tester": "^2",
+		"symfony/thanks": "^1"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "app"
+		}
+	},
+	"scripts": {
+		"phpstan": "phpstan analyse",
+		"tester": "tester tests -s"
+	},
+	"minimum-stability": "stable",
+	"config": {
+		"allow-plugins": {
+			"symfony/thanks": true
+		}
+	}
+}
