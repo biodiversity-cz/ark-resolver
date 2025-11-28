@@ -7,8 +7,8 @@
     <li><code>{$basePath}/resolve/&#36;&#123;value&#125;</code> - resolves the ARK value part (without scheme and prefix=NAAN)</li>
     <li><code>{$basePath}/resolve?ark=&#36;&#123;pid&#125;</code> - resolves the whole ARK PID</li>
     both with relevant health checks:
-    <li><a n:href=":resolve App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, App\Presentation\Home\HomePresenter::HealthCheck}</a></li>
-    <li><a n:href=":resolve null, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, null, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck}</a></li>
+    <li><a n:href=":resolve App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, App\Presentation\Home\HomePresenter::HealthCheck|replace:'http://','https://'}</a></li>
+    <li><a n:href=":resolve null, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, null, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck|replace:'http://','https://'}</a></li>
 </ul>
 
 
