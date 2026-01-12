@@ -26,40 +26,16 @@ final class HomePresenter extends Presenter
 
     public function actionFull(string $ark)
     {
-        $this->fullARK($ark);
-    }
-
-    protected function fullARK(string $ark)
-    {
-        $prefixes = [
-            'ark:' . $this->appConfiguration->getNaan() . '/' . self::HerbariumShoulder => 'https://herbarium.biodiversity.cz/ark'
-        ];
-
-        if ($ark === 'ark:' . $this->appConfiguration->getNaan() . '/' . self::HealthCheck) {
-            $this->keepAlive();
-            return;
-        }
-
-        foreach ($prefixes as $prefix => $url) {
-            if (str_starts_with($ark, $prefix)) {
-                $this->redirectUrl($url . '?ark=' . rawurlencode($ark));
-            }
+        if (str_starts_with($ark, $this->prefix())) {
+            $this->valueOfARK($this->trimJustArkValue($ark));
         }
 
         $this->redirectUrl('https://biodiversity.cz');
-
     }
 
-    protected function keepAlive()
+    protected function prefix(): string
     {
-        $response = new JsonResponse(['status' => 'OK']);
-        $this->sendResponse($response);
-    }
-
-    public function actionResolve(string $valueOfArk): void
-    {
-
-        $this->valueOfARK($valueOfArk);
+        return 'ark:' . $this->appConfiguration->getNaan() . '/';
     }
 
     protected function valueOfARK(string $arkValue)
@@ -80,5 +56,24 @@ final class HomePresenter extends Presenter
         }
 
         $this->redirectUrl('https://biodiversity.cz');
+    }
+
+    protected function keepAlive()
+    {
+        $response = new JsonResponse(['status' => 'OK']);
+        $this->sendResponse($response);
+    }
+
+    protected function trimJustArkValue(string $ark): string
+    {
+        return substr(
+            $ark,
+            strlen($this->prefix())
+        );
+    }
+
+    public function actionResolve(string $valueOfArk): void
+    {
+        $this->valueOfARK($valueOfArk);
     }
 }
