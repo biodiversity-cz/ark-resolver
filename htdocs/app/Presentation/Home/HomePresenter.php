@@ -24,17 +24,9 @@ final class HomePresenter extends Presenter
 
     }
 
-    public function actionResolve(?string $id, ?string $ark): void
+    public function actionFull(string $ark)
     {
-        if (!empty($ark)) { //http://localhost:8081/resolve-ark?ark=ark:xxxx/servicestatus
-            $this->fullARK($ark);
-        }
-
-        if (!empty($id)) { //http://localhost:8081/resolve/servicestatus
-            $this->valueOfARK($id);
-        }
-        $this->getParameter('NAAN');
-        $this->redirect(':default');
+        $this->fullARK($ark);
     }
 
     protected function fullARK(string $ark)
@@ -62,6 +54,12 @@ final class HomePresenter extends Presenter
     {
         $response = new JsonResponse(['status' => 'OK']);
         $this->sendResponse($response);
+    }
+
+    public function actionResolve(string $valueOfArk): void
+    {
+
+        $this->valueOfARK($valueOfArk);
     }
 
     protected function valueOfARK(string $arkValue)

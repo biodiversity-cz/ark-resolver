@@ -15,7 +15,14 @@ final class RouterFactory
 	public static function createRouter(): RouteList
 	{
 		$router = new RouteList;
-        $router->addRoute('resolve[/<id>]', 'Home:resolve');
+        $router->addRoute(
+            'resolve[/<valueOfArk .+>]',
+            'Home:resolve'
+        );
+        $router->addRoute(
+            'full[/<ark .+>]',
+            'Home:full'
+        );
         $router->addRoute('<presenter>/<action>[/<id>]', 'Home:default');
         return $router;
 	}
