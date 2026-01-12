@@ -13,8 +13,10 @@ use Nette\Application\UI\Presenter;
 final class HomePresenter extends Presenter
 {
 
-    /** @inject  */ public AppConfiguration $appConfiguration;
     public const string HealthCheck = 'servicestatus';
+    public const string HerbariumShoulder = 'nrp1HERB';
+    /** @inject */
+    public AppConfiguration $appConfiguration;
 
     public function renderDefault()
     {
@@ -37,13 +39,22 @@ final class HomePresenter extends Presenter
 
     protected function fullARK(string $ark)
     {
-        switch ($ark) {
-            case 'ark:' . $this->appConfiguration->getNaan() . '/' . self::HealthCheck:
-                $this->keepAlive();
-                break;
-            default:
-                $this->redirectUrl('https://biodiversity.cz');
+        $prefixes = [
+            'ark:' . $this->appConfiguration->getNaan() . '/' . self::HerbariumShoulder => 'https://herbarium.biodiversity.cz/ark'
+        ];
+
+        if ($ark === 'ark:' . $this->appConfiguration->getNaan() . '/' . self::HealthCheck) {
+            $this->keepAlive();
+            return;
         }
+
+        foreach ($prefixes as $prefix => $url) {
+            if (str_starts_with($ark, $prefix)) {
+                $this->redirectUrl($url . '?ark=' . rawurlencode($ark));
+            }
+        }
+
+        $this->redirectUrl('https://biodiversity.cz');
 
     }
 
@@ -55,12 +66,21 @@ final class HomePresenter extends Presenter
 
     protected function valueOfARK(string $arkValue)
     {
-        switch ($arkValue) {
-            case self::HealthCheck:
-                $this->keepAlive();
-                break;
-            default:
-                $this->redirectUrl('https://biodiversity.cz');
+        $prefixes = [
+            self::HerbariumShoulder => 'https://herbarium.biodiversity.cz/ark'
+        ];
+
+        if ($arkValue === self::HealthCheck) {
+            $this->keepAlive();
+            return;
         }
+
+        foreach ($prefixes as $prefix => $url) {
+            if (str_starts_with($arkValue, $prefix)) {
+                $this->redirectUrl($url . '?value=' . rawurlencode($arkValue));
+            }
+        }
+
+        $this->redirectUrl('https://biodiversity.cz');
     }
 }
