@@ -4,8 +4,8 @@
 
 <h3>Endpoints available:</h3>
 <ul>
-    <li><code>{$basePath}/resolve/&#36;&#123;value&#125;</code> - resolves the ARK value part (without scheme and prefix=NAAN); this variant is registered at the ARK Allience</li>
-    <li><code>{$basePath}/resolve?ark=&#36;&#123;pid&#125;</code> - resolves the whole ARK PID</li>
+    <li><code>{$basePath}/resolve/&#36;&#123;value&#125;</code> - resolves the ARK value part (without scheme and prefix=NAAN); this variant is registered at the ARK Alliance</li>
+    <li><code>{$basePath}/full/&#36;&#123;pid&#125;</code> - resolves the whole ARK PID</li>
     both with relevant health checks:
     <li><a n:href=":resolve App\Presentation\Home\HomePresenter::HealthCheck ">{link //:resolve, App\Presentation\Home\HomePresenter::HealthCheck|replace:'http://','https://'}</a> --> <a href="https://n2t.net/ark:12661/servicestatus">https://n2t.net/ark:12661/servicestatus</a></li>
     <li><a n:href=":full 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck ">{link //:full, 'ark:'.$naan.'/'.App\Presentation\Home\HomePresenter::HealthCheck|replace:'http://','https://'}</a></li>
