@@ -51,7 +51,7 @@ final class HomePresenter extends Presenter
 
         foreach ($prefixes as $prefix => $url) {
             if (str_starts_with($arkValue, $prefix)) {
-                $this->redirectUrl($url . '?value=' . rawurlencode($arkValue));
+                $this->redirectUrl($url . '/' . rawurlencode($arkValue));
             }
         }
 
