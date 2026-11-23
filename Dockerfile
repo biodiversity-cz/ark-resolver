@@ -1,4 +1,4 @@
-FROM ghcr.io/biodiversity-cz/php-fpm-noroot-socket:main@sha256:374990e47a7e85e6817528ace6360ec24102d62c0d6dcab0ae9f5bd899debb03
+FROM ghcr.io/biodiversity-cz/php-fpm-noroot-socket:main@sha256:4a2746d7d43951dd57d28e85cc58e3848932d7602eab8e6359a1f246e263539d
 
 MAINTAINER Petr Novotný <novotp@natur.cuni.cz>
 LABEL org.opencontainers.image.source=https://github.com/biodiversity-cz/ark-resolver
